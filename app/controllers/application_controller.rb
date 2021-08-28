@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
     @current_user = User.find(params[:name])
   end
   def show
+    
   end
 
 
