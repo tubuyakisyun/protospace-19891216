@@ -8,7 +8,21 @@ class PrototypesController < ApplicationController
   end
   def create
     Prototype.create(prototype_params)
-    
+    @prototype = Prototype.new(prototype_params)
+    if @prototype.save
+      redirect_to root_path(@prototype)
+    else
+      render :index
+    end
+
+    # @room = Room.find(params[:room_id])
+    # @message = @room.messages.new(message_params)
+    # if @message.save
+    #   redirect_to room_messages_path(@room)
+    # else
+    #   render :index
+    # end
+    # chatapp のメッセージ投稿昨日実装：メッセージ送信後の条件分岐
   end
 
 
