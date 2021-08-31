@@ -13,7 +13,7 @@ class PrototypesController < ApplicationController
     if @prototype.save
       redirect_to root_path(@prototype)
     else
-      render :index
+      render :new
     end
 
     # @room = Room.find(params[:room_id])
