@@ -1,10 +1,13 @@
 <div class="card">
-  <%= link_to image_tag("プロトタイプの画像", class: :card__img ), root_path%>
+  <%= link_to image_tag("プロトタイプの画像", class: :card__img ), prototype.image%>
+
   <div class="card__body">
-    <%= link_to "プロトタイプのタイトル", root_path, class: :card__title%>
+    <%= link_to "プロトタイプのタイトル", prototype.title, class: :card__title%>
+
     <p class="card__summary">
       <%= "プロトタイプのキャッチコピー" %>
     </p>
-    <%= link_to "by プロトタイプの投稿者名", root_path, class: :card__user %>
+
+    <%= link_to "by プロトタイプの投稿者名", prototype.user.name, class: :card__user %>
   </div>
 </div>
