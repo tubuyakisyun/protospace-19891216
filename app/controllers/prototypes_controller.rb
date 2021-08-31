@@ -13,6 +13,7 @@ class PrototypesController < ApplicationController
     if @prototype.save
       redirect_to root_path(@prototype)
     else
+      @prototypes = Prototype.includes(:user)
       render :new
     end
 
@@ -21,9 +22,20 @@ class PrototypesController < ApplicationController
     # if @message.save
     #   redirect_to room_messages_path(@room)
     # else
+    #   @messages = @roo.messages.includes(:user)
     #   render :index
     # end
     # chatapp のメッセージ投稿昨日実装：メッセージ送信後の条件分岐
+    
+    # また、投稿に失敗したときの処理にも、同様に@messagesを定義しました。
+    # renderを用いることで、投稿に失敗した@messageの情報を保持しつつ
+    # index.html.erbを参照することができます（この時、indexアクションは経由しません）。
+    # しかしながら、そのときに@messagesが定義されていないとエラーになってしまいます。
+    # そこで、indexアクションと同様に@messagesを定義する必要があります。
+  end
+  def shou
+    @prototypes = Prototype.includes(:user)
+
   end
 
 
