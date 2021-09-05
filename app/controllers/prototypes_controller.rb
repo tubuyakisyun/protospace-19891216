@@ -36,7 +36,7 @@ class PrototypesController < ApplicationController
     # そこで、indexアクションと同様に@messagesを定義する必要があります。
   end
   def show
-    @prototype = Prototype.find(params[:id])
+    @prototype= Prototype.find(params[:id])
     # @tweet = Tweet.find(params[:id])
   end
 
