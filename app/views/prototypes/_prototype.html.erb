@@ -3,7 +3,7 @@
     <%# <%=  prototype.image if prototype.image.attached?   ←こちらは画像が表示されるけど、画像リングない %>  
     <%# <%= link_to image_tag'prototype.image' root_path, class: :card__img  →ActionView::SyntaxErrorInTemplate in PrototypesController#index%>
     <%# ↓いろいろ調べたら、こちらのほうがちゃんと出来たんですが、画像の大きさがバラバラで、ちゃんと制御されてないです。。。link:https://try2explore.com/questions/jp/10123824 %>
-  <%= link_to root_path do %>
+  <%= link_to prototype_path do %>
     <%= image_tag prototype.image, class: :card__img if prototype.image.attached? %> 
   <% end %> 
   <div class="card__body">
@@ -11,6 +11,6 @@
     <p class="card__summary">
       <%= prototype.catch_copy %>
     </p>
-    <%= link_to "by #{prototype.user.name}", root_path, class: :card__user %>
+    <%= link_to "by #{prototype.user.name}", prototype_path, class: :card__user %>
   </div>
 </div>
