@@ -2,7 +2,9 @@ class PrototypesController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
 
   def index
+    @prototypes = Prototype.all 
     @prototypes = Prototype.includes(:user)
+
   end
   def new
     @prototype = Prototype.new
@@ -26,16 +28,16 @@ class PrototypesController < ApplicationController
     #   render :index
     # end
     # chatapp のメッセージ投稿昨日実装：メッセージ送信後の条件分岐
-    
+
     # また、投稿に失敗したときの処理にも、同様に@messagesを定義しました。
     # renderを用いることで、投稿に失敗した@messageの情報を保持しつつ
     # index.html.erbを参照することができます（この時、indexアクションは経由しません）。
     # しかしながら、そのときに@messagesが定義されていないとエラーになってしまいます。
     # そこで、indexアクションと同様に@messagesを定義する必要があります。
   end
-  def shou
-    @prototypes = Prototype.includes(:user)
-
+  def show
+    @prototype = Prototype.find(params[:id])
+    # @tweet = Tweet.find(params[:id])
   end
 
 
