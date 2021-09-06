@@ -54,6 +54,9 @@ class PrototypesController < ApplicationController
    
 
   end
+  def destroy
+
+  end
 
 
 
