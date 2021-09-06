@@ -9,7 +9,8 @@
       <% if user_signed_in? && current_user.id == @prototype.user_id %>
         <div class="prototype__manage">
           <%= link_to "編集する", edit_prototype_path(@prototype.id), class: :prototype__btn, method: :get %>
-          <%= link_to "削除する", root_path, class: :prototype__btn %>
+          <%= link_to "削除する", prototype_path(@prototype.id), class: :prototype__btn, method: :delete %>
+          <%# Prefixを用いる前は、"/tweets/#{tweet.id}"と記述してそれぞれのツイートのID（tweet.id）が入るようにしていました。一方、Prefixを用いる場合は、このツイートのIDはtweet_path(tweet.id)のようにPrefixの引数として渡すようにします。 %>
         </div>
       <% end %>
       <%# // プロトタイプの投稿者とログインしているユーザーが同じであれば上記を表示する %>
