@@ -38,6 +38,8 @@ class PrototypesController < ApplicationController
   def show
     @prototype = Prototype.find(params[:id])
     @comment = Comment.new
+    
+    @comments = @prototype.comments.includes(:user)
     # @tweet = Tweet.find(params[:id])
   end
   def edit
