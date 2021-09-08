@@ -1,6 +1,6 @@
 class PrototypesController < ApplicationController
+  # before_action :move_to_index, except: [:index, :show] prototypesコントローラーにおいて、投稿者以外がeditアクションにアクセスしたらトップページにリダイレクトするように記述した
   before_action :move_to_index, except: [:index, :show]
-
   def index
     @prototypes = Prototype.all 
     @prototypes = Prototype.includes(:user)
@@ -38,7 +38,7 @@ class PrototypesController < ApplicationController
   def show
     @prototype = Prototype.find(params[:id])
     @comment = Comment.new
-    
+
     @comments = @prototype.comments.includes(:user)
     # @tweet = Tweet.find(params[:id])
   end
