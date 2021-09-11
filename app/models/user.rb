@@ -8,6 +8,6 @@ class User < ApplicationRecord
   validates :occupation,    presence: true
   validates :position,      presence: true
 
-  has_many :prototypes
-  has_many :comments
+  has_many :prototypes,     foreign_key: :user_id,dependent: :destroy
+  has_many :comments,       foreign_key: :user_id,dependent: :destroy
 end
