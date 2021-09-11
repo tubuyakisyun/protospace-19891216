@@ -1,8 +1,12 @@
 class PrototypesController < ApplicationController
   # before_action :move_to_index, except: [:index, :show] prototypesコントローラーにおいて、投稿者以外がeditアクションにアクセスしたらトップページにリダイレクトするように記述した
-  before_action :move_to_index, except: [:index, :show]
+  # before_action :move_to_index, except: [:index, :show]
+  before_action :set_prototype, except: [:index, :new, :create]
+  before_action :authenticate_user!,except: [:index, :show]
+  before_action :contributor_confirmation, only: [:edit, :update, :destroy]
+
   def index
-    @prototypes = Prototype.all 
+    @prototypes = Prototype.new 
     @prototypes = Prototype.includes(:user)
 
   end
@@ -15,7 +19,7 @@ class PrototypesController < ApplicationController
     if @prototype.save
       redirect_to root_path(@prototype)
     else
-      @prototypes = Prototype.includes(:user)
+      # @prototypes = Prototype.includes(:user)
       render :new
     end
 
@@ -36,21 +40,16 @@ class PrototypesController < ApplicationController
     # そこで、indexアクションと同様に@messagesを定義する必要があります。
   end
   def show
-    @prototype = Prototype.find(params[:id])
     @comment = Comment.new
-
     @comments = @prototype.comments.includes(:user)
     # @tweet = Tweet.find(params[:id])
   end
   def edit
-    @prototype = Prototype.find(params[:id])
   end
   def update
-    @prototype = Prototype.find(params[:id])
    if @prototype.update(prototype_params)
     redirect_to root_path(@prototype)
    else 
-    @prototype = Prototype.find(params[:id])
     # prototype = Prototype.find(params[:id])← こちらはUPDATE出来なかった時、情報が保持されないに対し、＠がついたら保存できた。
     render :edit
    end
@@ -58,9 +57,11 @@ class PrototypesController < ApplicationController
 
   end
   def destroy
-    prototype = Prototype.find(params[:id])
-    prototype.destroy
-    render :index
+    if @prototype.destroy
+    redirect_to root_path 
+    else
+      redirect_to root_path
+    end
   end
 
 
@@ -72,10 +73,18 @@ class PrototypesController < ApplicationController
     # ツイート保存時にユーザー情報も追加しよう.merge(user_id: current_user.id)
     # params.require(:tweet).permit(:name, :image, :text).merge(user_id: current_user.id)
   end
-  def move_to_index
-    unless user_signed_in?
-      redirect_to action: :index
-    end
+  # def move_to_index
+    # unless user_signed_in?
+      # redirect_to action: :index
+    # end
+  # end
+  def set_prototype
+    @prototype = Prototype.find(params[:id])
   end
+
+  def contributor_confirmation 
+     redirect_to root_path unless current_user == @prototype.user
+  end
+
 
 end
