@@ -5,8 +5,8 @@ class UsersController < ApplicationController
     # @name = user.name
     # @prototypes = user.prototypes ←こちらだとエラーになってしまった
     # @name = @user.name              ←こうするとちゃんと機能してる
-    @name = @user.name  
-    @prototypes = @user.prototypes
+   # @name = @user.name  不要です
+    #@prototypes = @user.prototypes 不要です
     
   end
 end
