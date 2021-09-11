@@ -1,0 +1,16 @@
+<div class="card">
+    <%# <%= link_to image_tag("#{prototype.image}"), root_path, class: :card__img  ←こちらはSprockets::Rails::Helper::AssetNotFound in Prototypes#index というエラーが出てしまいました。%> 
+    <%# <%=  prototype.image if prototype.image.attached?   ←こちらは画像が表示されるけど、画像リングない %>  
+    <%# <%= link_to image_tag'prototype.image' root_path, class: :card__img  →ActionView::SyntaxErrorInTemplate in PrototypesController#index%>
+    <%# ↓いろいろ調べたら、こちらのほうがちゃんと出来たんですが、画像の大きさがバラバラで、ちゃんと制御されてないです。。。link:https://try2explore.com/questions/jp/10123824 %>
+  <%= link_to prototype_path(prototype.id), method: :get do %>
+    <%= image_tag prototype.image, class: :card__img if prototype.image.attached? %> 
+  <% end %> 
+  <div class="card__body">
+    <%= link_to "#{prototype.title}", root_path, class: :card__title%>
+    <p class="card__summary">
+      <%= prototype.catch_copy %>
+    </p>
+    <%= link_to "by #{prototype.user.name}", user_path(prototype.user_id), class: :card__user,  method: :get %>
+  </div>
+</div>
