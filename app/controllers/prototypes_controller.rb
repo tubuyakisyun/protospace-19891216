@@ -48,10 +48,10 @@ class PrototypesController < ApplicationController
   end
   def update
    if @prototype.update(prototype_params)
-    redirect_to root_path(@prototype)
+    redirect_to prototype_path(@prototype)
    else 
     # prototype = Prototype.find(params[:id])← こちらはUPDATE出来なかった時、情報が保持されないに対し、＠がついたら保存できた。
-    render :show
+    render :edit
    end
    
 
