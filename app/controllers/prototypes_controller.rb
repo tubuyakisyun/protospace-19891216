@@ -28,7 +28,7 @@ class PrototypesController < ApplicationController
     # if @message.save
     #   redirect_to room_messages_path(@room)
     # else
-    #   @messages = @roo.messages.includes(:user)
+    #   @messages = @room.messages.includes(:user)
     #   render :index
     # end
     # chatapp のメッセージ投稿昨日実装：メッセージ送信後の条件分岐
